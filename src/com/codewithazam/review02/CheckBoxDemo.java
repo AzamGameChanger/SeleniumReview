@@ -26,7 +26,7 @@ public class CheckBoxDemo extends Base {
 
             Thread.sleep(2000);
         }
-        
+
         tearDown();
     }
 }
