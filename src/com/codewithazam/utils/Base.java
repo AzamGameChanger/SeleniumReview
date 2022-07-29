@@ -4,11 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.time.Duration;
+
 public class Base {
 
     public static WebDriver driver;
 
-    public static void setUp(){
+    public static WebDriver setUp(){
         ConfigsReader.readProperties(Constants.CONFIGURATION_FILEPATH);
 
         switch (ConfigsReader.getProperty("browser").toLowerCase()){
@@ -23,7 +25,13 @@ public class Base {
             default:
                 throw new RuntimeException("Browser is not supported");
         }
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT_TIME));
+        driver.manage().window().maximize();
+
         driver.get(ConfigsReader.getProperty("url"));
+
+        return driver;
     }
 
     public static void tearDown(){
