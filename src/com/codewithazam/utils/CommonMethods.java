@@ -26,6 +26,15 @@ public class CommonMethods extends Base {
     }
 
     /**
+     * This method clicks to the specific element
+     *
+     * @param element
+     */
+    public static void click(WebElement element){
+        element.click();
+    }
+
+    /**
      * This method checks if radio/checkbox is enabled and then clicks on the
      * element that has the value we want.
      *
