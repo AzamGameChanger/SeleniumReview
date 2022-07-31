@@ -1,14 +1,12 @@
 package com.codewithazam.utils;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchFrameException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
 
@@ -228,4 +226,15 @@ public class CommonMethods extends Base {
 
         return getWaitObject().until(ExpectedConditions.elementToBeClickable(element));
     }
+
+    /**
+     * This method will wait for an element to be visible.
+     *
+     * @param element
+     * @return
+     */
+    public static WebElement waitForVisibility(WebElement element){
+        return getWaitObject().until(ExpectedConditions.visibilityOf(element));
+    }
+
 }
