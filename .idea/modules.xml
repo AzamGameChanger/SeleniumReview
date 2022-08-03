@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SeleniumReview.iml" filepath="$PROJECT_DIR$/SeleniumReview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestNGReview/TestNGReview.iml" filepath="$PROJECT_DIR$/TestNGReview/TestNGReview.iml" />
     </modules>
   </component>
 </project>
