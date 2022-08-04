@@ -1,8 +1,20 @@
 package com.codewithazam.lesson03;
 
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class GroupsDemo {
+
+    @BeforeClass(alwaysRun = true)
+    public void beforeClass(){
+        System.out.println("Before Class");
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void afterClass(){
+        System.out.println("After Class");
+    }
 
     @Test(groups = "smoke")
     public void test1() {

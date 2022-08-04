@@ -3,13 +3,11 @@
 <suite name="Failed suite [Default Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="SeleniumReview(failed)">
     <classes>
-      <class name="com.codewithazam.lesson02.SoftAssertDemo">
+      <class name="com.codewithazam.lesson04.ListenerDemo">
         <methods>
-          <include name="logoAndWelcomeValidation"/>
-          <include name="openAndNavigate"/>
-          <include name="quitBrowser"/>
+          <include name="test2"/>
         </methods>
-      </class> <!-- com.codewithazam.lesson02.SoftAssertDemo -->
+      </class> <!-- com.codewithazam.lesson04.ListenerDemo -->
     </classes>
   </test> <!-- SeleniumReview(failed) -->
 </suite> <!-- Failed suite [Default Suite] -->

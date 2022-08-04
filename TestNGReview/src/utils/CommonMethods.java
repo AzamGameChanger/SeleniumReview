@@ -1,15 +1,17 @@
 package utils;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchFrameException;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 
 public class CommonMethods extends Base {
@@ -237,6 +239,99 @@ public class CommonMethods extends Base {
      */
     public static WebElement waitForVisibility(WebElement element){
         return getWaitObject().until(ExpectedConditions.visibilityOf(element));
+    }
+
+    /**
+     * This method will select a date from the calendar
+     *
+     * @param elements
+     * @param date
+     */
+    public static void selectCalendarDate(List<WebElement> elements,String date){
+        for (WebElement day: elements){
+            if (day.isEnabled()){
+                if (day.getText().equals(date)){
+                    day.click();
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * This method will take the screenshot of the specific page and saves the file to reports folder under the project.
+     * Also handles IOException
+     *
+     * @param fileName
+     * @return
+     */
+    public static String takeScreenshot(String fileName) {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        String destinationFile = Constants.SCREENSHOT_FILEPATH + fileName + getTimeStamp() + ".png";
+        try {
+            FileUtils.copyFile(source, new File(destinationFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return destinationFile;
+    }
+
+    /**
+     * This method returns the current time stamp in a String
+     *
+     * @return
+     */
+    public static String getTimeStamp() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("_-_MM_dd_yyyy_-_HH:mm:ss");
+        return sdf.format(date);
+    }
+
+    /**
+     * This method casts the driver to JavascriptExecutor and returns it
+     *
+     * @return
+     */
+    public static JavascriptExecutor getJSObject() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return js;
+    }
+
+    /**
+     * This method will click to the element that is passed using JavascriptExecutor
+     *
+     * @param element
+     */
+    public static void jsClick(WebElement element) {
+        getJSObject().executeScript("arguments[0].click()", element);
+    }
+
+    /**
+     * This method will scroll the page until the element that is passed becomes visible
+     *
+     * @param element
+     */
+    public static void scrollToElement(WebElement element) {
+        getJSObject().executeScript("arguments[0].scrollIntoView(true)", element);
+    }
+
+    /**
+     * This method will scroll the page down based on the passed pixel parameter
+     *
+     * @param pixel
+     */
+    public static void scrollDown(int pixel) {
+        getJSObject().executeScript("window.scrollBy(0," + pixel + ")");
+    }
+
+    /**
+     * This method will scroll the page up based on the passed pixel parameter
+     *
+     * @param pixel
+     */
+    public static void scrollUp(int pixel) {
+        getJSObject().executeScript("window.scrollBy(0,-" + pixel + ")");
     }
 
 }
